@@ -23,39 +23,41 @@
 const prevBtn = document.querySelector('[data-carousel-btn="prev"]');
 const nextBtn = document.querySelector('[data-carousel-btn="next"]');
 
-const tracks = document.querySelector(".slider-track");
-const slides = Array.from(tracks.children);
-
-const slideWidth = slides[0].getBoundingClientRect().width;
-slides.forEach((slide, index) => {
-    console.log(slide);
-    slide.style.left = slideWidth * index + 'px';
-});
-
-nextBtn.addEventListener("click", e => {
-    const activeSlide = tracks.querySelector('.active-slide');
-    const nextSlide = activeSlide.nextElementSibling;
-    const activeContent = activeSlide.querySelector('.active-content');
-    const nextContent = nextSlide.querySelector('.main-image-content');
-    const amountToMove = nextSlide.style.left;
-    tracks.style.transform = 'translateX(-' + amountToMove + ')';
-    activeSlide.classList.remove('active-slide');
-    nextSlide.classList.add('active-slide');
-    activeContent.classList.remove('active-content');
-    nextContent.classList.add('active-content');
-    nextContent.style.setProperty('--animation-name', 'right-left');
-});
-
-prevBtn.addEventListener("click", e => {
-    const activeSlide = tracks.querySelector('.active-slide');
-    const prevSlide = activeSlide.previousElementSibling;
-    const activeContent = activeSlide.querySelector('.active-content');
-    const prevContent = prevSlide.querySelector('.main-image-content');
-    const amountToMove = prevSlide.style.left;
-    tracks.style.transform = 'translateX(-' + amountToMove + ')';
-    activeSlide.classList.remove('active-slide');
-    prevSlide.classList.add('active-slide');
-    activeContent.classList.remove('active-content');
-    prevContent.classList.add('active-content');
-    prevContent.style.setProperty('--animation-name', 'left-right');
+const tracks = document.querySelectorAll(".slider-track");
+tracks.forEach(track => {
+    const slides = Array.from(track.children);
+    
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    slides.forEach((slide, index) => {
+        console.log(slide);
+        slide.style.left = slideWidth * index + 'px';
+    });
+    
+    nextBtn.addEventListener("click", e => {
+        const activeSlide = track.querySelector('.active-slide');
+        const nextSlide = activeSlide.nextElementSibling;
+        const activeContent = activeSlide.querySelector('.active-content');
+        const nextContent = nextSlide.querySelector('.main-image-content');
+        const amountToMove = nextSlide.style.left;
+        track.style.transform = 'translateX(-' + amountToMove + ')';
+        activeSlide.classList.remove('active-slide');
+        nextSlide.classList.add('active-slide');
+        activeContent.classList.remove('active-content');
+        nextContent.classList.add('active-content');
+        nextContent.style.setProperty('--animation-name', 'right-left');
+    });
+    
+    prevBtn.addEventListener("click", e => {
+        const activeSlide = track.querySelector('.active-slide');
+        const prevSlide = activeSlide.previousElementSibling;
+        const activeContent = activeSlide.querySelector('.active-content');
+        const prevContent = prevSlide.querySelector('.main-image-content');
+        const amountToMove = prevSlide.style.left;
+        track.style.transform = 'translateX(-' + amountToMove + ')';
+        activeSlide.classList.remove('active-slide');
+        prevSlide.classList.add('active-slide');
+        activeContent.classList.remove('active-content');
+        prevContent.classList.add('active-content');
+        prevContent.style.setProperty('--animation-name', 'left-right');
+    });
 });
