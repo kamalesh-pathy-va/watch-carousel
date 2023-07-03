@@ -1,6 +1,9 @@
 :root {
   --clr-primary: hsl(0, 0%, 100%);
-  --clr-ascent-brown: hsl(42, 100%, 92%);
+  --clr-ascent-brown: hsl(32, 49%, 68%);
+  --clr-ascent-green: hsl(156, 49%, 68%);
+  --clr-ascent-gold: hsl(22, 50%, 64%);
+  --clr-ascent-blue: hsl(203, 100%, 75%);
 }
 
 *,
@@ -128,10 +131,11 @@ main {
   padding-block-end: 10px;
 }
 
-.active-content {
-  --animation-name: right-left;
-  animation: var(--animation-name) 250ms linear 200ms forwards;
-  opacity: 1;
+.active-content,
+.active-text,
+.active-feature {
+  --_animation-name: left-right;
+  animation: var(--_animation-name) 250ms linear 200ms forwards;
 }
 
 .content-title {
@@ -143,6 +147,7 @@ main {
 }
 
 .content-link {
+  --_underline-color: var(--clr-ascent-brown);
   text-decoration: none;
   color: white;
   text-transform: uppercase;
@@ -157,7 +162,42 @@ main {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--clr-ascent-brown);
+  background-color: var(--_underline-color);
+}
+
+.text-container {
+  margin: 3rem 2rem;
+  overflow: hidden;
+}
+
+.text-content {
+  display: none;
+  opacity: 0;
+  font-size: 3.5rem;
+  padding-inline-end: 5rem;
+  transition: all 350ms cubic-bezier(0.81, 0.16, 0.59, 0.9);
+}
+
+.active-text {
+  display: block;
+  animation-delay: 15 0ms;
+}
+
+.feature-container {
+  overflow: hidden;
+}
+
+.feature-content {
+  --_bg-color: var(--clr-ascent-brown);
+  display: none;
+  opacity: 0;
+  background-color: var(--_bg-color);
+  height: 100%;
+  padding: 3rem 2rem;
+}
+
+.active-feature {
+  display: block;
 }
 
 .site-title {
@@ -165,6 +205,17 @@ main {
   top: 0;
   left: 0;
   margin: 3rem 5rem;
+}
+
+.mail-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 3rem 5rem;
+}
+
+.mail-link img {
+  width: 2rem;
 }
 
 .controls {
@@ -184,6 +235,10 @@ main {
   border-radius: 50%;
   border: 1px solid white;
   background-color: transparent;
+}
+
+.btn:disabled {
+  opacity: 0.5;
 }
 
 @keyframes left-right {
