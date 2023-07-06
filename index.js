@@ -1,32 +1,31 @@
-// const buttons = document.querySelectorAll("[data-carousel-btn]");
+const cursor = document.getElementById("cursor");
+const pointer = document.getElementById("pointer");
 
-// buttons.forEach(button => {
-//     button.addEventListener("click", () => {
-//         const offset = button.dataset.carouselBtn === 'next' ? 1 : -1;
-//         const slideTracks = document.querySelectorAll('.slider-track');
-//         slideTracks.forEach(slideTrack => {
-//             const slides = slideTrack.querySelectorAll(".slide");
-//             console.log(slides);
-//             const activeSlide = slideTrack.querySelector(".active-slide");
-//             console.log(activeSlide);
-//             let newIndex = [...slides].indexOf(activeSlide) + offset;
+document.body.onpointermove = coordinates => {
+    const { clientX, clientY } = coordinates;
 
-//             if (newIndex < 0) return;
-//             if (newIndex > slides.length) return;
-            
-//             slides[newIndex].classList.add('active-slide');
-//             activeSlide.classList.remove('active-slide');
-//         });
-//     });
-// });
+    pointer.style.left = `${clientX}px`;
+    pointer.style.top = `${clientY}px`;
+
+    cursor.animate({
+        left: `${clientX}px`,
+        top: `${clientY}px`}, {duration: 150, fill: "forwards"});
+};
 
 const prevBtn = document.querySelector('[data-carousel-btn="prev"]');
 const nextBtn = document.querySelector('[data-carousel-btn="next"]');
 
+let slideIndex = 1;
+const currentIndex = document.querySelector('.current-index');
+currentIndex.innerHTML = `0${slideIndex}`;
+
+const totalIndex = document.querySelector('.total-index');
+
 const tracks = document.querySelectorAll(".slider-track");
 tracks.forEach(track => {
     const slides = Array.from(track.children);
-    
+    totalIndex.innerHTML = `/0${slides.length}`;
+
     const slideWidth = slides[0].getBoundingClientRect().width;
     slides.forEach((slide, index) => {
         slide.style.left = slideWidth * index + 'px';
@@ -81,6 +80,8 @@ nextBtn.addEventListener("click", () => {
     nextText.style.setProperty('--_animation-name', 'right-left');
     nextFeature.style.setProperty('--_animation-name', 'right-left');
 
+    currentIndex.innerHTML = `0${++slideIndex}`;
+
     prevBtn.disabled = false;
     if (nextText.nextElementSibling === null) {
         nextBtn.disabled = true;
@@ -100,6 +101,8 @@ prevBtn.addEventListener("click", () => {
     
     activeFeature.classList.remove('active-feature');
     prevFeature.classList.add('active-feature');
+
+    currentIndex.innerHTML = `0${--slideIndex}`;
 
     prevText.style.setProperty('--_animation-name', 'left-right');
     prevFeature.style.setProperty('--_animation-name', 'left-right');
