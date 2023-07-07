@@ -2,14 +2,14 @@ const cursor = document.getElementById("cursor");
 const pointer = document.getElementById("pointer");
 
 document.querySelector('.main-wrapper').onpointermove = coordinates => {
-    const { clientX, clientY } = coordinates;
+    const { pageX, pageY } = coordinates;
 
-    pointer.style.left = `${clientX}px`;
-    pointer.style.top = `${clientY}px`;
+    pointer.style.left = `${pageX}px`;
+    pointer.style.top = `${pageY}px`;
 
     cursor.animate({
-        left: `${clientX}px`,
-        top: `${clientY}px`}, {duration: 150, fill: "forwards"});
+        left: `${pageX}px`,
+        top: `${pageY}px`}, {duration: 150, fill: "forwards"});
 };
 
 const prevBtn = document.querySelector('[data-carousel-btn="prev"]');
