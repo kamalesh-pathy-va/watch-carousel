@@ -9,12 +9,15 @@
   --timing-function: cubic-bezier(1, 0.07, 0.43, 0.79);
 
   --fs-xl: clamp(2rem, 5vw + 0.1rem, 5rem);
-  --fs-l: clamp(1rem, 3vw + 0.1rem, 4rem);
+  --fs-l: clamp(2rem, 2vw + 1rem, 4rem);
   --fs-m: clamp(1.25rem, 3vw + 0.1rem, 2rem);
   --fs-r: clamp(1rem, 2vw + 0.1rem, 1.25rem);
-  --fs-s: clamp(0.5rem, 2vw + 0.1rem, 1.125rem);
+  --fs-s: clamp(0.5rem, 1vh + 0.4rem, 1.125rem);
 
   --fw-bold: 800;
+
+  --general-spacing: clamp(1rem, 5vw + 1rem, 5rem);
+  --spacing-l: clamp(5rem, 10vw + 1rem, 15rem);
 }
 
 *,
@@ -35,7 +38,7 @@ main {
   grid-template-columns: 50% 23% auto;
   grid-template-rows: 1fr 1fr;
   position: relative;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   cursor: none;
 }
@@ -89,8 +92,8 @@ main button {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 5rem;
-  padding-inline-end: 15rem;
+  padding: var(--general-spacing);
+  padding-inline-end: var(--spacing-l);
   width: 100%;
   overflow: hidden;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.801));
@@ -101,7 +104,7 @@ main button {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding-block-end: 10px;
+  line-height: 1.1;
 }
 
 .active-content,
@@ -146,7 +149,7 @@ main button {
 }
 
 .text-container {
-  margin: 3rem 2rem;
+  margin: clamp(1rem, 5vw + 1rem, 2rem);
   overflow: hidden;
 }
 
@@ -154,7 +157,8 @@ main button {
   display: none;
   opacity: 0;
   font-size: var(--fs-l);
-  padding-inline-end: 5rem;
+  line-height: 1.1;
+  padding-inline-end: var(--general-spacing);
   transition: opacity 200ms var(--timing-function);
 }
 
@@ -173,11 +177,11 @@ main button {
   opacity: 0;
   background-color: var(--_bg-color);
   height: 100%;
-  padding: 3rem 2rem;
+  padding: clamp(1rem, 5vw + 1rem, 2rem);
   flex-direction: column;
   align-items: start;
   color: black;
-  gap: 2rem;
+  gap: 1rem;
   font-size: var(--fs-s);
 }
 
@@ -190,26 +194,24 @@ main button {
   display: grid;
   grid-template-columns: 15% 1fr;
   width: 90%;
-  align-items: center;
+  place-items: center; /* For my remembrance */
   gap: 1.5rem;
 }
 
-.feature-icon {
-  margin: auto;
+.feature-description {
+  justify-self: left; /* For my remembrance */
 }
 
 .site-title {
   position: absolute;
-  top: 0;
-  left: 0;
-  margin: 3rem 5rem;
+  top: 3rem;
+  left: var(--general-spacing);
 }
 
 .mail-link {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 3rem 5rem;
+  top: 3rem;
+  right: var(--general-spacing);
 }
 
 .mail-link img {
@@ -218,9 +220,8 @@ main button {
 
 .slide-counter {
   position: absolute;
-  /* background-color: orange; */
   bottom: 5rem;
-  right: 15rem;
+  right: clamp(10rem, 10vw + 1rem, 15rem);
   display: flex;
   gap: 0.5rem;
   align-items: start;
@@ -236,8 +237,8 @@ main button {
 
 .controls {
   position: absolute;
-  bottom: 5rem;
-  right: 5rem;
+  bottom: var(--general-spacing);
+  right: var(--general-spacing);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -250,6 +251,14 @@ main button {
   border-radius: 50%;
   border: 1px solid white;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn > img {
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .btn:disabled {
@@ -281,6 +290,62 @@ main button {
   left: 50%;
   translate: -50% -50%;
   pointer-events: none;
+}
+
+@media (max-width: 67.5rem) {
+  :root {
+    --fs-l: clamp(2rem, 4vw + 1rem, 4rem);
+  }
+
+  #pointer,
+  #cursor,
+  .image-container-sub,
+  .slide-counter {
+    display: none;
+  }
+
+  main {
+    grid-template-columns: 60% 1fr;
+  }
+
+  .controls,
+  .mail-link {
+    left: 50%;
+    right: auto;
+  }
+
+  .btn {
+    width: 3rem;
+  }
+
+  .btn > img {
+    width: 90%;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  :root {
+    --general-spacing: clamp(1rem, 5vw + 1rem, 5rem);
+    --spacing-l: clamp(2rem, 10vw + 1rem, 3rem);
+  }
+  main {
+    grid-template-columns: 100%;
+  }
+
+  .content-container {
+    padding-inline-end: calc(var(--general-spacing) + 2rem);
+  }
+
+  .text-container,
+  .feature-container {
+    display: none;
+  }
+
+  .controls,
+  .mail-link {
+    right: 1rem;
+    left: auto;
+  }
 }
 
 @keyframes left-right {
