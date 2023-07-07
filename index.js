@@ -1,7 +1,7 @@
 const cursor = document.getElementById("cursor");
 const pointer = document.getElementById("pointer");
 
-document.body.onpointermove = coordinates => {
+document.querySelector('.main-wrapper').onpointermove = coordinates => {
     const { clientX, clientY } = coordinates;
 
     pointer.style.left = `${clientX}px`;

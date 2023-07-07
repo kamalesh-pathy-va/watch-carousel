@@ -23,7 +23,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: none;
 }
 
 html {
@@ -38,6 +37,12 @@ main {
   position: relative;
   max-height: 100vh;
   overflow: hidden;
+  cursor: none;
+}
+
+main a,
+main button {
+  cursor: none;
 }
 
 .image-container-main,
